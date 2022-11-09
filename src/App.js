@@ -12,14 +12,18 @@ const App = () => {
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://randomuser.me/api?results=20')
       .then(res => res.json())
-      .then(users => setMonsters(users));
+      .then(users => setMonsters(users.results));
   }, []);
 
   useEffect(() => {
     const newFilteredMonsters = monsters.filter(monster => {
-      return monster.name.toLocaleLowerCase().includes(searchField);
+      return (
+        monster.name.title.toLocaleLowerCase().includes(searchField) ||
+        monster.name.first.toLocaleLowerCase().includes(searchField) ||
+        monster.name.last.toLocaleLowerCase().includes(searchField)
+      );
     });
     setFilteredMonsters(newFilteredMonsters);
   }, [monsters, searchField]);

@@ -4,8 +4,8 @@ import './card-list.style.css';
 
 const CardList = ({ monsters }) => (
   <div className="card-list">
-    {monsters.map(monster => {
-      return <Card monster={monster} key={monster.id} />;
+    {monsters.map((monster, i) => {
+      return <Card monster={monster} key={i} />;
     })}
   </div>
 );
